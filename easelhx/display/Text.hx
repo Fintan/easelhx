@@ -57,6 +57,21 @@ extern class Text extends DisplayObject {
 	/** If true, the text will be drawn as a stroke (outline). If false, the text will be drawn as a fill. **/
 	public var outline( default, default ) : Bool;
 	
+	/** Indicates the line height (vertical distance between baselines) for multi-line text. If null, 
+	* the value of getMeasuredLineHeight is used.
+	* @property lineHeight
+	* @type Number
+	**/
+	public var lineHeight( default, default ) : Float;
+	
+	/**
+	* Indicates the maximum width for a line of text before it is wrapped to multiple lines. If null, 
+	* the text will not be wrapped.
+	* @property lineWidth
+	* @type Number
+	**/
+	public var lineWidth( default, default ) : Float;
+	
 // constructor:
 	/**
 	* Constructs a new Text instance.
@@ -70,12 +85,31 @@ extern class Text extends DisplayObject {
 	public function new( text : String, font : String, ?color : String ) : Void;
 	
 // public methods:
+
+	/**
+	* Returns true or false indicating whether the display object would be visible if drawn to a canvas.
+	* This does not account for whether it would be visible within the boundaries of the stage.
+	* NOTE: This method is mainly for internal use, though it may be useful for advanced uses.
+	* @method isVisible
+	* @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
+	**/
+	override public function isVisible() : Bool;
+	
 	override public function draw( ctx : Dynamic, ignoreCache : Bool ) : Bool;
 	
 	/**
 	* Returns the measured, untransformed width of the text.
 	**/
 	public function getMeasuredWidth() : Float;
+	
+	/**
+	* Returns an approximate line height of the text, ignoring the lineHeight property. This is based 
+	* on the measured width of a "M" character multiplied by 1.2, which approximates em for most fonts.
+	* @method getMeasuredLineHeight
+	* @return {Number} an approximate line height of the text, ignoring the lineHeight property. This is 
+	* based on the measured width of a "M" character multiplied by 1.2, which approximates em for most fonts.
+	**/
+	public function getMeasuredLineHeight() : Float;
 	
 	override public function clone() : DisplayObject;
 		

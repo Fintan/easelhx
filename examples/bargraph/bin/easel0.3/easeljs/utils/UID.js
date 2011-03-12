@@ -1,5 +1,5 @@
 /**
-* Bitmap by Grant Skinner. Dec 5, 2010
+* UID by Grant Skinner. Dec 5, 2010
 * Visit www.gskinner.com/blog for documentation, updates and more free code.
 *
 *
@@ -26,45 +26,29 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 **/
-package easelhx.geom;
 
-@:native("Rectangle")
-extern class Rectangle {
-
-// public properties:
-	/** X position. **/
-	public var x( default, default ) : Float;
-	
-	/** Y position. **/
-	public var y( default, default ) : Float;
-	
-	/** Width. **/
-	//public var w( default, default ) : Float;
-	public var width( default, default ) : Float;
-	/** Height. **/
-	//public var h( default, default ) : Float;
-	public var height( default, default ) : Float;
+(function(window) {
 	
 // constructor:
 	/**
-	* Constructs a new Rectangle instance.
-	* @param x X position. Default is 0.
-	* @param y Y position. Default is 0.
-	* @param w Width. Default is 0.
-	* @param h Height. Default is 0.
-	* @class Represents a rectangle as defined by the points (x,y) and (x+w,y+h).
+	* The UID class uses a static interface (ex. UID.get()) and should not be instantiated.
+	* @class Global utility for generating sequential unique ID numbers.
 	**/
-	public function new( x : Float, y : Float, w : Float, h : Float ) : Void;
+	function UID() {
+		throw "UID cannot be instantiated"; 
+	}
 	
-// public methods:
+// private static properties:
+	/** @private **/
+	UID._nextID = 0;
+	
 	/**
-	* Returns a clone of this Rectangle.
+	* Returns the next unique id.
+	* @static
 	**/
-	public function clone() : Rectangle;
+	UID.get = function() {
+		return UID._nextID++;
+	}
 
-	/**
-	* Returns a string representation of this object.
-	**/
-	public function toString() : String;
-	
-}
+window.UID = UID;
+}(window));

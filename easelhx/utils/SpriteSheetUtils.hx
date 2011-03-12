@@ -73,5 +73,17 @@ extern class SpriteSheetUtils {
 	* @static
 	**/
 	public static function frameDataToString( frameData : Dynamic ) : String;
+	
+	/**
+	* Returns a single frame of the specified sprite sheet as a new PNG image.
+	* @method extractFrame
+	* @static
+	* @param {Image} spriteSheet The SpriteSheet instance to extract a frame from.
+	* @param {Number} frame The frame number or sequence name to extract. If a sequence 
+	* name is specified, only the first frame of the sequence will be extracted.
+	* @return {Image} a single frame of the specified sprite sheet as a new PNG image.
+	*/
+	public static function frameDataToString( spriteSheet:Image, frame:Float ) : Image;
+
 
 }

@@ -50,6 +50,16 @@ extern class Shape extends DisplayObject {
 	public function new( ?graphics : Graphics ) : Void;
 	
 // public methods:
+
+	/**
+	* Returns true or false indicating whether the Shape would be visible if drawn to a canvas.
+	* This does not account for whether it would be visible within the boundaries of the stage.
+	* NOTE: This method is mainly for internal use, though it may be useful for advanced uses.
+	* @method isVisible
+	* @return {Boolean} Boolean indicating whether the Shape would be visible if drawn to a canvas
+	**/
+	override public function isVisible() : Bool;
+
 	override public function draw( ctx : Dynamic, ignoreCache : Bool ) : Bool;
 	
 	override public function clone() : DisplayObject;

@@ -1,5 +1,5 @@
 /**
-* Bitmap by Grant Skinner. Dec 5, 2010
+* Shadow by Grant Skinner. Dec 5, 2010
 * Visit www.gskinner.com/blog for documentation, updates and more free code.
 *
 *
@@ -26,51 +26,66 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 **/
-package easelhx.display;
 
-@:native("Shadow")
-extern class Shadow {
+(function(window) {
 
+/**
+* Constructs a new Shadow object.
+* @param color The color of the shadow.
+* @param offsetX The x offset of the shadow.
+* @param offsetY The y offset of the shadow.
+* @param blur The blur of the shadow.
+* @class Encapsulates the properties required to define a shadow to apply to a DisplayObject via it's .shadow property.
+**/
+function Shadow(color, offsetX, offsetY, blur) {
+  this.init(color, offsetX, offsetY, blur);
+}
+var p = Shadow.prototype;
+	
 // static public properties:
 	/**
 	* An identity shadow object (all properties are set to 0). Read-only.
 	* @static
 	**/
-	public static var identity : Shadow;
+	Shadow.identity = null; // set at bottom of class definition.
 	
 // public properties:
 	/** The blur of the shadow. **/
-	public var blur( default, default ) : Float;
-	
+	p.blur = 0;
 	/** The color of the shadow. **/
-	public var color( default, default ) : Int;
-	
+	p.color = 0;
 	/** The x offset of the shadow. **/
-	public var offsetX( default, default ) : Float;
-	
+	p.offsetX = 0;
 	/** The y offset of the shadow. **/
-	public var offsetY( default, default ) : Float;
+	p.offsetY = 0;
 	
 // constructor:
-	/**
-	* Constructs a new Shadow object.
-	* @param color The color of the shadow.
-	* @param offsetX The x offset of the shadow.
-	* @param offsetY The y offset of the shadow.
-	* @param blur The blur of the shadow.
-	* @class Encapsulates the properties required to define a shadow to apply to a DisplayObject via it's .shadow property.
-	**/
-	public function new( color : Int, offsetX : Float, offsetY : Float, blur : Float ) : Void;
+	/** @private **/
+	p.init = function(color, offsetX, offsetY, blur) {
+		this.color = color;
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
+		this.blur = blur;
+	}
 	
 // public methods:
 	/**
 	* Returns a string representation of this object.
 	**/
-	public function toString() : String;
+	p.toString = function() {
+		return "[Shadow]";
+	}
+	
 	
 	/**
 	* Returns a clone of this object.
 	**/
-	public function clone() : Shadow;
+	p.clone = function() {
+		return new Shadow(this.color, this.offsetX, this.offsetY, this.blur);
+	}
 	
-}
+	// this has to be populated after the class is defined:
+	Shadow.identity = new Shadow(0, 0, 0, 0);
+	
+window.Shadow = Shadow;
+}(window));

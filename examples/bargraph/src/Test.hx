@@ -6,7 +6,7 @@ import easelhx.display.Container;
 import easelhx.display.Shape;
 import easelhx.display.Text;
 import easelhx.display.Graphics;
-import easelhx.utils.Tick;
+import easelhx.utils.Ticker;
 
 class Test {
 	
@@ -33,7 +33,10 @@ class Test {
 		bars = [];
 		
 		canvas = cast Lib.document.getElementById("testCanvas");
+		trace("canvas "+canvas);
 		stage =  new Stage(canvas);
+		// enabled mouse over / out events
+		stage.enableMouseOver(10);
 		
 		// generate some random data:
 		var numBars = 4 + Math.ceil( Math.random()*6 );
@@ -84,7 +87,8 @@ class Test {
 		for( i in 0...numBars ) {
 			// each bar is assembled in it's own Container, to make them easier to work with:
 			var bar = new Container();
-			
+			//bar.mouseEnabled = false;
+			bar.mouseEnabled = true;
 			// this will determine the color of each bar, save as a property of the bar for use in drawBar:
 			var hue = getHueForBarIndex(i, numBars);
 			
@@ -103,6 +107,7 @@ class Test {
 				.lineTo(barWidth,0)
 				.lineTo(0,0)
 				.closePath();
+			
 			
 			// if this has the max value, we can draw the star into the top:
 			if( barValues[i] == max ) {
@@ -145,6 +150,26 @@ class Test {
 			bar.x = i*(barWidth+barPadding)+60;
 			bar.y = canvas.height-70;
 			
+			
+			bar.onPress = function(e):Void{
+				trace("onPress: "+ i);
+				e.onMouseMove = function(ev) {
+					trace("mouse mov");
+				}
+			};
+			
+			bar.onMouseOver = function(e){
+				trace("onMouseOver: "+ i);
+			};
+			
+			bar.onMouseOut = function(e){
+				trace("onMouseOut: "+ i);
+			};
+			/*
+			bar.onClick = function(e):Void{
+				trace("hello: "+ i);
+			};
+			*/
 			stage.addChild(bar);
 			bars.push(bar);
 			
@@ -156,13 +181,13 @@ class Test {
 		count = numBars*10;
 		
 		// start the tick and point it at the window so we can do some work before updating the stage:
-		Tick.setInterval(50);		// 50 ms = 20 fps
-		Tick.addListener(this);
+		Ticker.setInterval(50);		// 50 ms = 20 fps
+		Ticker.addListener(this);
 	}
 
 	function tick() {
 		// if we are on the last frame of animation, then remove the tick listener:
-		if (--count == 1) { Tick.removeListener(this); }
+		if (--count == 1) { Ticker.removeListener(this); }
 		
 		// animate the bars in one at a time:
 		var c = bars.length*10-count;

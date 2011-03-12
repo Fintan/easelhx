@@ -1,5 +1,5 @@
 /**
-* Bitmap by Grant Skinner. Dec 5, 2010
+* Point by Grant Skinner. Dec 5, 2010
 * Visit www.gskinner.com/blog for documentation, updates and more free code.
 *
 *
@@ -26,45 +26,47 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 **/
-package easelhx.geom;
 
-@:native("Rectangle")
-extern class Rectangle {
+(function(window) {
 
+/**
+* Constructs a new Point instance.
+* @param x X position. Default is 0.
+* @param y Y position. Default is 0.
+* @class Represents a point with x / y coordinates.
+**/
+function Point(x, y) {
+  this.init(x, y);
+}
+var p = Point.prototype;
+	
 // public properties:
 	/** X position. **/
-	public var x( default, default ) : Float;
-	
+	p.x = 0;
 	/** Y position. **/
-	public var y( default, default ) : Float;
-	
-	/** Width. **/
-	//public var w( default, default ) : Float;
-	public var width( default, default ) : Float;
-	/** Height. **/
-	//public var h( default, default ) : Float;
-	public var height( default, default ) : Float;
+	p.y = 0;
 	
 // constructor:
-	/**
-	* Constructs a new Rectangle instance.
-	* @param x X position. Default is 0.
-	* @param y Y position. Default is 0.
-	* @param w Width. Default is 0.
-	* @param h Height. Default is 0.
-	* @class Represents a rectangle as defined by the points (x,y) and (x+w,y+h).
-	**/
-	public function new( x : Float, y : Float, w : Float, h : Float ) : Void;
+	/** @private **/
+	p.init = function(x, y) {
+		this.x = (x == null ? 0 : x);
+		this.y = (y == null ? 0 : y);
+	}
 	
 // public methods:
 	/**
-	* Returns a clone of this Rectangle.
+	* Returns a clone of this Point.
 	**/
-	public function clone() : Rectangle;
+	p.clone = function() {
+		return new Point(this.x, this.y);
+	}
 
 	/**
 	* Returns a string representation of this object.
 	**/
-	public function toString() : String;
+	p.toString = function() {
+		return "[Point (x="+this.x+" y="+this.y+")]";
+	}
 	
-}
+window.Point = Point;
+}(window));

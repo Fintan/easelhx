@@ -76,7 +76,7 @@ extern class Stage extends Container {
 	* @param x The x coordinate to test.
 	* @param y The y coordinate to test.
 	**/
-	public function getObjectsUnderPoint( x : Float, y : Float ) : Array<DisplayObject>;
+	override public function getObjectsUnderPoint( x : Float, y : Float ) : Array<DisplayObject>;
 	
 	/**
 	* Similar to getObjectsUnderPoint(), but returns only the top-most display object. This runs significantly faster 
@@ -84,7 +84,17 @@ extern class Stage extends Container {
 	* @param x The x coordinate to test.
 	* @param y The y coordinate to test.
 	**/
-	public function getObjectUnderPoint( x : Float, y : Float ) : DisplayObject;
+	override public function getObjectUnderPoint( x : Float, y : Float ) : DisplayObject;
+	
+	/**
+	* Enables or disables (by passing a frequency of 0) mouse over handlers (onMouseOver and onMouseOut) for this stage's display
+	* list. These events can be expensive to generate, so they are disabled by default, and the frequency of the events
+	* can be controlled independently of mouse move events via the frequency parameter.
+	* @method enableMouseOver
+	* @param {Number} frequency The maximum number of times per second to broadcast mouse over/out events. Set to 0 to disable mouse
+	* over events completely. Maximum is 50. A lower frequency is less responsive, but uses less CPU.
+	**/
+	public function enableMouseOver(frequency:Float) : Void;
 	
 	override public function clone() : DisplayObject;
 		

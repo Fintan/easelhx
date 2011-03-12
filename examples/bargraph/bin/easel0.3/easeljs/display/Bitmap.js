@@ -26,58 +26,61 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 **/
-package easelhx.display;
 
-@:native("Bitmap")
-extern class Bitmap extends DisplayObject {
-	
+(function(window) {
+
+/**
+* Constructs a Bitmap object with the specified source image.
+* @param image The Image, Canvas, or Video to render to the display list.
+* @class A Bitmap represents an Image, Canvas, or Video in the display list.
+* @augments DisplayObject
+**/
+function Bitmap(image) {
+  this.init(image);
+}
+var p = Bitmap.prototype = new DisplayObject();
+
 // public properties:
 	/** The image to render. This can be an Image, a Canvas, or a Video. **/
-	public var image( default, default ) : Dynamic;
+	p.image = null;
 	
 // constructor:
-	/**
-	* Constructs a Bitmap object with the specified source image.
-	* @param image The Image, Canvas, or Video to render to the display list.
-	* @class A Bitmap represents an Image, Canvas, or Video in the display list.
-	* @augments DisplayObject
-	**/
-	public function new( image : Dynamic ) : Void;
-	
-	/**
-	* Returns true or false indicating whether the display object would be visible if drawn to a canvas.
-	* This does not account for whether it would be visible within the boundaries of the stage.
-	* NOTE: This method is mainly for internal use, though it may be useful for advanced uses.
-	* @method isVisible
-	* @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
-	**/
-	public function isVisible() : Bool;
-	
-	/**
-	* Whether or not the Bitmap should be draw to the canvas at whole pixel coordinates.
-	* @property snapToPixel
-	* @type Boolean
-	* @default true
-	**/
-	public var snapToPixel( default, default ) : Bool;
+	/** @private **/
+	p._init = p.init;
+	/** @private **/
+	p.init = function(image) {
+		this._init();
+		this.image = image;
+	}
 	
 // public methods:
 	/** @borrows DisplayObject#draw as this.draw **/
-	override public function draw( ctx : Dynamic, ignoreCache : Bool ) : Bool;
+	p._draw = p.draw;
+	p.draw = function(ctx,ignoreCache) {
+		if (this.image == null || !(this.image.complete || this.image.getContext)) { return false; }
+		if (!this._draw(ctx,ignoreCache)) { return false; }
+		ctx.drawImage(this.image,0,0);
+	}
 	
 	/**
 	* Because the content of a Bitmap is already in a simple format, cache is unnecessary for Bitmap instances.
 	**/
-	//public function cache() : Void;
-	override public function cache( x : Float, y : Float, w : Float, h : Float ) : Void;
+	p.cache = function() {}
 	
 	/**
 	* Because the content of a Bitmap is already in a simple format, cache is unnecessary for Bitmap instances.
 	**/
-	override public function uncache() : Void;
+	p.uncache = function() {}
 	
-	override public function clone() : DisplayObject;
+	p.clone = function() {
+		var o = new Bitmap(this.image);
+		this.cloneProps(o);
+		return o;
+	}
 	
-	override public function toString() : String;
-	
-}
+	p.toString = function() {
+		return "[Bitmap (name="+  this.name +")]";
+	}
+
+window.Bitmap = Bitmap;
+}(window));

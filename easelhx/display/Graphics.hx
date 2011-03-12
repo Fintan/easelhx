@@ -58,7 +58,31 @@ extern class Graphics {
 	**/
 	public static function getHSL( hue : Int, saturation : Int, lightness : Int, ?alpha : Float ) : String;
 	
-	public static var _canvas : DomCanvas;
+	/**
+	* Maps numeric values for the caps parameter of setStrokeStyle to corresponding string values.
+	* This is primarily for use with the tiny API. The mappings are as follows: 0 to "butt",
+	* 1 to "round", and 2 to "square".
+	* For example, myGraphics.ss(16, 2) would set the line caps to "square".
+	* @property STROKE_CAPS_MAP
+	* @static
+	* @final
+	* @type Array[String]
+	**/
+	public static var STROKE_CAPS_MAP : Array<String>;
+	
+	/**
+	* Maps numeric values for the joints parameter of setStrokeStyle to corresponding string values.
+	* This is primarily for use with the tiny API. The mappings are as follows: 0 to "miter",
+	* 1 to "round", and 2 to "bevel".
+	* For example, myGraphics.ss(16, 0, 2) would set the line joints to "bevel".
+	* @property STROKE_JOINTS_MAP
+	* @static
+	* @final
+	* @type Array[String]
+	**/
+	public static var STROKE_JOINTS_MAP : Array<String>;
+	
+	//public static var _canvas : DomCanvas;
 	public static var _ctx : Dynamic;
 	
 	public static var beginCmd : Command;
@@ -66,6 +90,65 @@ extern class Graphics {
 	public static var strokeCmd : Command;
 	
 // public properties:
+
+	/**
+	* @property _strokeInstructions
+	* @protected
+	* @type Array[Command]
+	**/
+	public var _strokeInstructions:Array<Command>;
+
+	/**
+	* @property _strokeStyleInstructions
+	* @protected
+	* @type Array[Command]
+	**/
+	public var _strokeStyleInstructions:Array<Command>;
+	
+	/**
+	* @property _fillInstructions
+	* @protected
+	* @type Array[Command]
+	**/
+	public var _fillInstructions:Array<Command>;
+	
+	/**
+	* @property _instructions
+	* @protected
+	* @type Array[Command]
+	**/
+	public var _instructions:Array<Command>;
+	
+	/**
+	* @property _oldInstructions
+	* @protected
+	* @type Array[Command]
+	**/
+	public var _oldInstructions:Array<Command>;
+	
+	/**
+	* @property _activeInstructions
+	* @protected
+	* @type Array[Command]
+	**/
+	public var _activeInstructions:Array<Command>;
+	
+	/**
+	* @property _active
+	* @protected
+	* @type Boolean
+	* @default false
+	**/
+	public var _active:Bool;
+	
+	/**
+	* @property _dirty
+	* @protected
+	* @type Boolean
+	* @default false
+	**/
+	public var _dirty:Bool;
+	
 	
 // constructor:
 	/**
@@ -353,6 +436,197 @@ extern class Graphics {
 	public function clone() : Graphics;
 		
 	public function toString() : String;
+	
+	// tiny API:
+		/** Shortcut to moveTo.
+		* @property mt
+		* @protected
+		* type Function
+		**/
+	public function mt( x : Float, y : Float ) : Graphics;
+
+		/** Shortcut to lineTo.
+		* @property lt
+		* @protected
+		* type Function
+		**/
+	public function lt( x : Float, y : Float ) : Graphics;
+
+		/** Shortcut to arcTo.
+		* @property at
+		* @protected
+		* type Function
+		**/
+	public function at( x1 : Float, y1 : Float, x2 : Float, y2 : Float, radius : Float ) : Graphics;
+
+		/** Shortcut to bezierCurveTo.
+		* @property bt
+		* @protected
+		* type Function
+		**/
+	public function bt( cp1x : Float, cp1y : Float, cp2x : Float, cp2y : Float, x : Float, y : Float ) : Graphics;
+
+		/** Shortcut to quadraticCurveTo / curveTo.
+		* @property qt
+		* @protected
+		* type Function
+		**/
+	public function qt( cpx : Float, cpy : Float, x : Float, y : Float ) : Graphics;
+
+		/** Shortcut to arc.
+		* @property a
+		* @protected
+		* type Function
+		**/
+	public function a( x : Float, y : Float, radius : Float, startAngle : Float, endAngle : Float, ?anticlockwise : Bool ) : Graphics;
+	
+
+		/** Shortcut to rect.
+		* @property r
+		* @protected
+		* type Function
+		**/
+	public function r( x : Float, y : Float, w : Float, h : Float ) : Graphics;
+
+		/** Shortcut to closePath.
+		* @property cp
+		* @protected
+		* type Function
+		**/
+	public function cp() : Graphics;
+
+		/** Shortcut to clear.
+		* @property c
+		* @protected
+		* type Function
+		**/
+	public function c() : Graphics;
+
+		/** Shortcut to beginFill.
+		* @property f
+		* @protected
+		* type Function
+		**/
+	public function f( color : String ) : Graphics;
+
+		/** Shortcut to beginLinearGradientFill.
+		* @property lf
+		* @protected
+		* type Function
+		**/
+	public function lf( colors : Array<String>, ratios : Array<Float>, x0 : Float, y0 : Float, 
+		x1 : Float, y1 : Float ) : Graphics;
+
+		/** Shortcut to beginRadialGradientFill.
+		* @property rf
+		* @protected
+		* type Function
+		**/
+	public function rf( colors : Array<String>, ratios : Array<Float>, x0 : Float, y0 : Float, r0 : Float, 
+		x1 : Float, y1 : Float, r1 : Float ) : Graphics;
+
+		/** Shortcut to beginBitmapFill.
+		* @property bf
+		* @protected
+		* type Function
+		**/
+	public function bf( image : Dynamic, ?repetition : String ) : Graphics;
+
+		/** Shortcut to endFill.
+		* @property ef
+		* @protected
+		* type Function
+		**/
+	public function ef() : Graphics;
+
+		/** Shortcut to setStrokeStyle.
+		* @property ss
+		* @protected
+		* type Function
+		**/
+	public function ss( thickness : Float, ?caps : String, ?joints : String, ?miterLimit : Float ) : Graphics;
+	
+
+		/** Shortcut to beginStroke.
+		* @property s
+		* @protected
+		* type Function
+		**/
+	public function s( color : String ) : Graphics;
+
+		/** Shortcut to beginLinearGradientStroke.
+		* @property ls
+		* @protected
+		* type Function
+		**/
+	public function ls( colors : Array<String>, ratios : Array<Float>, x0 : Float, y0 : Float, 
+		x1 : Float, y1 : Float ) : Graphics;
+
+		/** Shortcut to beginRadialGradientStroke.
+		* @property rs
+		* @protected
+		* type Function
+		**/
+	public function rs( colors : Array<String>, ratios : Array<Float>, x0 : Float, y0 : Float, 
+		r0 : Float, x1 : Float, y1 : Float, r1 : Float ) : Graphics;
+
+		/** Shortcut to beginBitmapStroke.
+		* @property bs
+		* @protected
+		* type Function
+		**/
+	public function bs( image : Dynamic, ?repetition : String ) : Graphics;
+
+		/** Shortcut to endStroke.
+		* @property es
+		* @protected
+		* type Function
+		**/
+	public function es() : Graphics;
+
+		/** Shortcut to drawRect.
+		* @property dr
+		* @protected
+		* type Function
+		**/
+	public function dr( x : Float, y : Float, w : Float, h : Float ) : Graphics;
+
+		/** Shortcut to drawRoundRect.
+		* @property rr
+		* @protected
+		* type Function
+		**/
+	public function rr( x : Float, y : Float, w : Float, h : Float, radius : Float ) : Graphics;
+
+		/** Shortcut to drawRoundRectComplex.
+		* @property rc
+		* @protected
+		* type Function
+		**/
+	public function rc( x : Float, y : Float, w : Float, h : Float, 
+		radiusTL : Float, radiusTR : Float, radiusBR : Float, radiusBL : Float ) : Graphics;
+
+		/** Shortcut to drawCircle.
+		* @property dc
+		* @protected
+		* type Function
+		**/
+	public function dc( x : Float, y : Float, radius : Float ) : Graphics;
+
+		/** Shortcut to drawEllipse.
+		* @property de
+		* @protected
+		* type Function
+		**/
+	public function de( x : Float, y : Float, w : Float, h : Float ) : Graphics;
+
+		/** Shortcut to drawPolyStar.
+		* @property dp
+		* @protected
+		* type Function
+		**/
+	public function dp( x : Float, y : Float, radius : Float, sides : Float, pointSize : Float, angle : Float ) : Graphics;
+	
 	
 // GDS: clip?, isPointInPath?
 	

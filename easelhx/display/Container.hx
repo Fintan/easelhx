@@ -27,6 +27,7 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 **/
 package easelhx.display;
+import easelhx.display.DisplayObject;
 
 @:native("Container")
 extern class Container extends DisplayObject {
@@ -52,6 +53,15 @@ extern class Container extends DisplayObject {
 	* @augments DisplayObject
 	**/
 	public function new() : Void;
+	
+	/**
+	* Returns true or false indicating whether the display object would be visible if drawn to a canvas.
+	* This does not account for whether it would be visible within the boundaries of the stage.
+	* NOTE: This method is mainly for internal use, though it may be useful for advanced uses.
+	* @method isVisible
+	* @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
+	**/
+	override public function isVisible() : Bool;
 	
 // public methods:
 	/** @private **/
@@ -118,6 +128,50 @@ extern class Container extends DisplayObject {
 	* Returns the number of children in the display list.
 	**/
 	public function getNumChildren() : Int;
+	
+	/**
+	* Returns true if the specified display object either is this container or is a descendent.
+	* (child, grandchild, etc) of this container.
+	* @method contains
+	* @param {DisplayObject} child The DisplayObject to be checked.
+	* @return {Boolean} true if the specified display object either is this container or is a descendent.
+	**/
+	public function contains(child:DisplayObject) : Bool;
+	
+	/**
+	* Tests whether the display object intersects the specified local point (ie. draws a pixel with alpha > 0 at the specified 
+	* position). This ignores the alpha, shadow and compositeOperation of the display object, and all transform properties 
+	* including regX/Y.
+	* @method hitTest
+	* @param x The x position to check in the display object's local coordinates.
+	* @param y The y position to check in the display object's local coordinates.
+	* @return {Boolean} A Boolean indicating whether there is a visible section of a DisplayObject that overlaps the specified 
+	* coordinates.
+	**/
+	override public function hitTest(x:Float, y:Float) : Bool;
+	
+	/**
+	* Returns an array of all display objects under the specified coordinates that are in this container's display list. 
+	* This routine ignores any display objects with mouseEnabled set to false. The array will be sorted in order of visual 
+	* depth, with the top-most display object at index 0. This uses shape based hit detection, and can be an expensive operation 
+	* to run, so it is best to use it carefully. For example, if testing for objects under the mouse, test on tick (instead of on 
+	* mousemove), and only if the mouse's position has changed.
+	* @method getObjectsUnderPoint
+	* @param {Number} x The x position in the container to test.
+	* @param {Number} y The y position in the container to test.
+	* @return {Array[DisplayObject]} An Array of DisplayObjects under the specified coordinates.
+	**/
+	public function getObjectsUnderPoint(x:Float, y:Float) : Array<DisplayObject>;
+
+	/**
+	* Similar to getObjectsUnderPoint(), but returns only the top-most display object. This runs significantly faster than 
+	* getObjectsUnderPoint(), but is still an expensive operation. See getObjectsUnderPoint() for more information.
+	* @method getObjectUnderPoint
+	* @param {Number} x The x position in the container to test.
+	* @param {Number} y The y position in the container to test.
+	* @return {DisplayObject} The top-most display object under the specified coordinates.
+	**/
+	public function getObjectUnderPoint(x:Float, y:Float) : DisplayObject;
 	
 	override public function clone() : DisplayObject;
 	

@@ -1,6 +1,6 @@
-/**
-* Bitmap by Grant Skinner. Dec 5, 2010
-* Visit www.gskinner.com/blog for documentation, updates and more free code.
+/*
+* UID by Grant Skinner. Dec 5, 2010
+* Visit http://easeljs.com/ for documentation, updates and examples.
 *
 *
 * Copyright (c) 2010 Grant Skinner
@@ -25,46 +25,44 @@
 * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/**
+* The Easel Javascript library provides a retained graphics mode for canvas 
+* including a full, hierarchical display list, a core interaction model, and 
+* helper classes to make working with Canvas much easier.
+* @module EaselJS
 **/
-package easelhx.geom;
 
-@:native("Rectangle")
-extern class Rectangle {
 
-// public properties:
-	/** X position. **/
-	public var x( default, default ) : Float;
+(function(window) {
 	
-	/** Y position. **/
-	public var y( default, default ) : Float;
-	
-	/** Width. **/
-	//public var w( default, default ) : Float;
-	public var width( default, default ) : Float;
-	/** Height. **/
-	//public var h( default, default ) : Float;
-	public var height( default, default ) : Float;
-	
-// constructor:
 	/**
-	* Constructs a new Rectangle instance.
-	* @param x X position. Default is 0.
-	* @param y Y position. Default is 0.
-	* @param w Width. Default is 0.
-	* @param h Height. Default is 0.
-	* @class Represents a rectangle as defined by the points (x,y) and (x+w,y+h).
+	* Global utility for generating sequential unique ID numbers.
+	* The UID class uses a static interface (ex. UID.get()) and should not be instantiated.
+	* @class UID
+	* @static
 	**/
-	public function new( x : Float, y : Float, w : Float, h : Float ) : Void;
+	UID = function() {
+		throw "UID cannot be instantiated"; 
+	}
 	
-// public methods:
-	/**
-	* Returns a clone of this Rectangle.
+	/** 
+	* @property _nextID
+	* @type Number
+	* @protected 
 	**/
-	public function clone() : Rectangle;
+	UID._nextID = 0;
+	
+	/**
+	* Returns the next unique id.
+	* @method get
+	* @return {Number} The next unique id
+	* @static
+	**/
+	UID.get = function() {
+		return UID._nextID++;
+	}
 
-	/**
-	* Returns a string representation of this object.
-	**/
-	public function toString() : String;
-	
-}
+window.UID = UID;
+}(window));

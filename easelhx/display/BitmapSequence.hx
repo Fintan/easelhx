@@ -61,6 +61,14 @@ extern class BitmapSequence extends DisplayObject {
 	* for more information. **/
 	public var spriteSheet( default, default ) : SpriteSheet;
 	
+	/**
+	* Whether or not the Bitmap should be draw to the canvas at whole pixel coordinates.
+	* @property snapToPixel
+	* @type Boolean
+	* @default true
+	**/
+	public var snapToPixel( default, default ) : Bool;
+	
 // constructor:
 	/**
 	* Constructs a BitmapSequence object with the specified sprite sheet.
@@ -76,6 +84,16 @@ extern class BitmapSequence extends DisplayObject {
 	public function new( spriteSheet : SpriteSheet ) : Void;
 	
 // public methods:
+
+	/**
+	* Returns true or false indicating whether the display object would be visible if drawn to a canvas.
+	* This does not account for whether it would be visible within the boundaries of the stage.
+	* NOTE: This method is mainly for internal use, though it may be useful for advanced uses.
+	* @method isVisible
+	* @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
+	**/
+	public function isVisible() : Bool;
+	
 	override public function draw( ctx : Dynamic, ignoreCache : Bool ) : Bool;
 	
 	/**
@@ -107,5 +125,13 @@ extern class BitmapSequence extends DisplayObject {
 	override public function clone() : DisplayObject;
 		
 	override public function toString() : String;
+	
+	/** 
+	* @method cloneProps
+	* @param {Text} o
+	* @protected
+	**/
+	override public function cloneProps(o:Dynamic) : Void;
+
 
 }
