@@ -67,7 +67,7 @@ extern class BitmapSequence extends DisplayObject {
 	* @type Boolean
 	* @default true
 	**/
-	public var snapToPixel( default, default ) : Bool;
+	override public var snapToPixel( default, default ) : Bool;
 	
 // constructor:
 	/**
@@ -92,7 +92,7 @@ extern class BitmapSequence extends DisplayObject {
 	* @method isVisible
 	* @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
 	**/
-	public function isVisible() : Bool;
+	override public function isVisible() : Bool;
 	
 	override public function draw( ctx : Dynamic, ignoreCache : Bool ) : Bool;
 	
@@ -131,7 +131,7 @@ extern class BitmapSequence extends DisplayObject {
 	* @param {Text} o
 	* @protected
 	**/
-	override public function cloneProps(o:Dynamic) : Void;
+	public function cloneProps(o:Dynamic) : Void;
 
 
 }

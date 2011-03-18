@@ -51,7 +51,7 @@ extern class Bitmap extends DisplayObject {
 	* @method isVisible
 	* @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
 	**/
-	public function isVisible() : Bool;
+	override public function isVisible() : Bool;
 	
 	/**
 	* Whether or not the Bitmap should be draw to the canvas at whole pixel coordinates.
@@ -59,7 +59,7 @@ extern class Bitmap extends DisplayObject {
 	* @type Boolean
 	* @default true
 	**/
-	public var snapToPixel( default, default ) : Bool;
+	override public var snapToPixel( default, default ) : Bool;
 	
 // public methods:
 	/** @borrows DisplayObject#draw as this.draw **/
