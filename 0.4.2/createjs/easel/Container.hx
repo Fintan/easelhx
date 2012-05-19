@@ -97,7 +97,7 @@ extern class Container extends DisplayObject {
 	*	Returns the number of children in the display list.
 	*
 	*/
-	public function getNumChildren ():Float;
+	public function getNumChildren ():Int;
 	
 	/**
 	*	@method getObjectsUnderPoint

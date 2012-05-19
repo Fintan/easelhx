@@ -104,7 +104,7 @@ extern class Ticker {
 	*	frames / ticks per second. Defaults to the number of ticks per second.
 	*
 	*/
-	public static function getMeasuredFPS (ticks:Float):Float;
+	public static function getMeasuredFPS (?ticks:Float):Float;
 	
 	/**
 	*	@method getPaused
