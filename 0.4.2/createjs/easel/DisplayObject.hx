@@ -278,7 +278,7 @@ extern class DisplayObject {
 	*	Matrix object is returned.
 	*
 	*/
-	public function getConcatenatedMatrix (mtx:Matrix2D):Matrix2D;
+	public function getConcatenatedMatrix (?mtx:Matrix2D):Matrix2D;
 	
 	/**
 	*	@method getMatrix
