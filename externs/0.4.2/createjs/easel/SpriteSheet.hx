@@ -133,11 +133,19 @@ extern class SpriteSheet {
 	public function getAnimation (name:Dynamic):Dynamic;
 	
 	/**
+	 * Returns the total number of frames in the specified animation, or in the whole sprite
+	 * sheet if the animation param is omitted.
+	 * @param {String} animation The name of the animation to get a frame count for.
+	 * @return {Number} The number of frames in the animation, or in the entire sprite sheet if the animation param is omitted.
+	*/
+	public function getNumFrames(animation:String):Int;
+	
+	/**
 	*	@method getAnimations
 	*	Returns an array of all available animation names as strings.
 	*
 	*/
-	public function getAnimations ():Array <Dynamic>;
+	public function getAnimations ():Array <String>;
 	
 	/**
 	*	@method getFrame

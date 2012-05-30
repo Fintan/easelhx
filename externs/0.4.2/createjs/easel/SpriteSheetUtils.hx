@@ -48,6 +48,6 @@ extern class SpriteSheetUtils {
 	*	horizontally: &#123;walk_left: ["walk_right", true, false]&#125;
 	*
 	*/
-	public static function flip (spriteSheet:Image, flipData:Dynamic):Dynamic;
+	public static function addFlippedFrames(spriteSheet:Image, horizontal:Bool, vertical:Bool, both:Bool):Void;
 
 }
