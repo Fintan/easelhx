@@ -209,7 +209,7 @@ extern class PreloadJS extends AbstractLoader {
 	*	@param Boolean (null)  
 	*
 	*/
-	public function new (Boolean:Void):Void;
+	public function new (?boo:Bool):Void;
 	
 	/**
 	*	@method proxy

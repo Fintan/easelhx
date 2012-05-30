@@ -210,7 +210,7 @@ extern class SoundJS {
 	*	@param pan (Number)  The left-right pan of the sound (if supported), between -1 (left) and 1 (right)
 	*
 	*/
-	public static function play (value:String, interrupt:String, delay:Float, offset:Float, loop:Float, volume:Float, pan:Float):SoundInstance;
+	public static function play (value:String, interrupt:String, ?delay:Float, ?offset:Float, ?loop:Float, ?volume:Float, ?pan:Float):SoundInstance;
 	
 	/**
 	*	@method playFinished
@@ -250,6 +250,8 @@ extern class SoundJS {
 	*
 	*/
 	public static function registerPlugins (plugins:Array <Dynamic>):Bool;
+	
+	public static function checkPlugin (initializeDefault:Bool):Bool;
 	
 	/**
 	*	@method resume
@@ -295,6 +297,6 @@ extern class SoundJS {
 	*	@param id (Dynamic)  The specific sound ID (set) to target.
 	*
 	*/
-	public static function stop (id:Dynamic):Dynamic;
+	public static function stop (?id:Dynamic):Dynamic;
 
 }
