@@ -87,5 +87,23 @@ extern class MouseEvent {
 	*
 	*/
 	public function toString ():String;
+	
+	/**
+	 * For events of type "onPress" and "onMouseDown" only you can assign a handler to the onMouseMove
+	 * property. This handler will be called every time the mouse is moved until the mouse is released.
+	 * This is useful for operations such as drag and drop.
+	 * @event onMouseMove
+	 * @param {MouseEvent} event A MouseEvent instance with information about the current mouse event.
+	 **/
+	public var onMouseMove:Dynamic;
+
+	/**
+	 * For events of type "onPress" and "onMouseDown" only you can assign a handler to the onMouseUp
+	 * property. This handler will be called every time the mouse is moved until the mouse is released.
+	 * This is useful for operations such as drag and drop.
+	 * @event onMouseUp
+	 * @param {MouseEvent} event A MouseEvent instance with information about the current mouse event.
+	*/
+	public var onMouseUp:Dynamic;
 
 }

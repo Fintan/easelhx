@@ -3,8 +3,6 @@ package createjs.easel;
 import js.w3c.html5.Canvas2DContext;
 import js.w3c.html5.Core;
 
-
-
 /**
 *	DisplayObject is an abstract class that should not be constructed directly. Instead construct subclasses such as
 *	Sprite, Bitmap, and Shape. DisplayObject is the base class for all display classes in the CanvasDisplay library.
@@ -430,5 +428,56 @@ extern class DisplayObject {
 	private function _tick ():Dynamic;
 	
 	private function cloneProps (o:DisplayObject):Dynamic;
+	
+	/**
+	 * The onClick callback is called when the user presses down on and then releases the mouse button over this
+	 * display object. The handler is passed a single param containing the corresponding MouseEvent instance. If an
+	 * onClick handler is set on a container, it will receive the event if any of its children are clicked.
+	 * @event onClick
+	 * @param {MouseEvent} event MouseEvent with information about the event.
+	 **/
+	public var onClick:Dynamic;
+	
+	/**
+	 * The onDoubleClick callback is called when the user double clicks over this display object. The handler is
+	 * passed a single param containing the corresponding MouseEvent instance. If an onDoubleClick handler is set
+	 * on a container, it will receive the event if any of its children are clicked.
+	 * @event onDoubleClick
+	 * @param {MouseEvent} event MouseEvent with information about the event.
+	 **/
+	public var onDoubleClick:Dynamic;
+	
+	/**
+	 * The onMouseOut callback is called when the user rolls off of the display object. You must enable this event using
+	 * stage.enableMouseOver(). The handler is passed a single param containing the corresponding MouseEvent instance.
+	 * @event onMouseOut
+	 * @param {MouseEvent} event MouseEvent with information about the event.
+	 **/
+	public var onMouseOut:Dynamic;
+	
+	/**
+	 * The onMouseOver callback is called when the user rolls over the display object. You must enable this event using
+	 * stage.enableMouseOver(). The handler is passed a single param containing the corresponding MouseEvent instance.
+	 * @event onMouseOver
+	 * @param {MouseEvent} event MouseEvent with information about the event.
+	 **/
+	public var onMouseOver:Dynamic;
+	
+	/**
+	 * The onPress callback is called when the user presses down on their mouse over this display object. The handler
+	 * is passed a single param containing the corresponding MouseEvent instance. You can subscribe to the onMouseMove
+	 * and onMouseUp callbacks of the event object to receive these events until the user releases the mouse button.
+	 * If an onPress handler is set on a container, it will receive the event if any of its children are clicked.
+	 * @event onPress
+	 * @param {MouseEvent} event MouseEvent with information about the event.
+	 **/
+	public var onPress:Dynamic;
+	
+	/**
+	 * The onTick callback is called on each display object on a stage whenever the stage updates.
+	 * This occurs immediately before the rendering (draw) pass.
+	 * @event onTick
+	 **/
+	public var onTick:Dynamic;
 
 }
