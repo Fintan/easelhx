@@ -1,6 +1,6 @@
 package createjs.easel;
 
-
+import js.w3c.touch.Events;
 
 /**
 *	Global utility for working with touch enabled devices in EaselJS.
