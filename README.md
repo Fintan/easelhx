@@ -9,7 +9,7 @@ Externs available for:
 Download easeljs from [http://easeljs.com/](http://easeljs.com/)
 
 ###Note: 
-Demos can be found [here](https://github.com/Fintan/Haxe-Demos/tree/master/demos/src/demos/easel).
+Demos can be found [here](https://github.com/Fintan/Coding-Demos/tree/master/easeljs_examples).
 
 
 Feel free to try out and report any issues
