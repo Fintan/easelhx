@@ -231,7 +231,7 @@ extern class SpriteSheet {
 	*	@param data (null)  
 	*
 	*/
-	public function new (data:Void):Void;
+	public function new (data:Dynamic):Void;
 	
 	/**
 	*	@method toString

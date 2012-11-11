@@ -25,6 +25,10 @@ module.exports = function(grunt) {
 			cacheasbitmap: {
 				src: ['../js/*.js', 'build/cacheasbitmap.js'],
 				dest: 'dist/cacheasbitmap.js'
+			},
+			simplespritesheet: {
+				src: ['../js/*.js', 'build/simplespritesheet.js'],
+				dest: 'dist/simplespritesheet.js'
 			}
 		},
 		min: {
@@ -43,6 +47,10 @@ module.exports = function(grunt) {
 			cacheasbitmap: {
 				src: ['<banner:meta.banner>', '<config:concat.cacheasbitmap.dest>'],
 				dest: 'dist/cacheasbitmap.js'
+			},
+			simplespritesheet: {
+				src: ['<banner:meta.banner>', '<config:concat.simplespritesheet.dest>'],
+				dest: 'dist/simplespritesheet.js'
 			}
 		},
 		watch: {
@@ -100,6 +108,10 @@ module.exports = function(grunt) {
 					cacheasbitmap: {
 						main: 'demos.easel.CacheAsBitmapTest',
 						output: 'build/cacheasbitmap.js'
+					},
+					simplespritesheet: {
+						main: 'demos.easel.SimpleSpriteSheetTest',
+						output: 'build/simplespritesheet.js'
 					}
 				}
 			}
