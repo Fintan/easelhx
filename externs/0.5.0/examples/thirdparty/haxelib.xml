@@ -1,0 +1,6 @@
+<project name="xirsys_stdjs" url="http://github.com/xirsys/stdjs" license="GPL">
+    <user name="xirsys"/>
+    <tag v="javascript"/>
+    <description>Standard JavaScript ECMAScript v5 Type Definitions for HaXe</description>
+    <version name="5.0.4">5.0.4</version>
+</project>

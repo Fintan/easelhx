@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>EaselJS Example: Using cache and snapToPixel</title>
+
+<link href="assets/demoStyles.css" rel="stylesheet" type="text/css" />
+	<style>
+		.controls {
+			padding: 10px;
+		}
+	</style>
+</head>
+	
+<body>
+
+	<header id="header" class="EaselJS">
+	    <h1><span class="text-product">Easel<strong>JS</strong></span> Cache as Bitmap Example</h1>
+	    <p>This example demonstrates the effect of <strong>DisplayObject.cache()</strong> and <strong>snapToPixel</strong> on performance. Caching speeds things up because the complex vector shapes do not have to be rerendered each tick. The results for snapToPixel vary between browsers, but in general it will have no effect on the uncached shapes, but a significant effect when cached.</p>
+	</header>
+
+	<!-- background isn't set to black to demonstrate how the darkening applies -->
+	<div class="controls">
+		<input id="enableCache" type="checkbox"/> cache enabled
+		<input id="snapToPixel" type="checkbox"/> snapToPixel enabled
+	</div>
+	<canvas id="testCanvas" width="960" height="350"></canvas>
+
+	<div id="haxe:trace"></div>
+	<script type="text/javascript" src="cacheasbitmap.js"></script>
+</body>
+</html>
