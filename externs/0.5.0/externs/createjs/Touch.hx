@@ -30,7 +30,7 @@ extern class Touch {
 	*	@param allowDefault (Boolean)  If true, then default gesture actions (ex. scrolling, zooming) will be allowed when the user is interacting with the target canvas. Default is false.
 	*
 	*/
-	public static function enable (stage:Stage, singleTouch:Bool, allowDefault:Bool):Bool;
+	public static function enable (stage:Stage, singleTouch:Bool=false, allowDefault:Bool=false):Bool;
 	
 	/**
 	*	@method isSupported

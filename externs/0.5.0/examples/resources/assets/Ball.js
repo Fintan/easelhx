@@ -11,7 +11,7 @@ function Ball(imageSource) {
 
 }
 
-Ball.prototype = new Container();
+Ball.prototype = new createjs.Container();
 
 Ball.prototype.vx = 0;
 Ball.prototype.vy = 0;

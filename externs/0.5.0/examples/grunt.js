@@ -18,6 +18,10 @@ module.exports = function(grunt) {
 				src: ['../js/*.js', 'build/localtoglobal.js'],
 				dest: 'dist/localtoglobal.js'
 			},
+			globaltolocal3: {
+				src: ['../js/*.js', 'resources/assets/SimpleBall.js',  'build/globaltolocal3.js'],
+				dest: 'dist/globaltolocal3.js'
+			},
 			matrixtest: {
 				src: ['../js/*.js', 'build/matrixtest.js'],
 				dest: 'dist/matrixtest.js'
@@ -29,6 +33,10 @@ module.exports = function(grunt) {
 			simplespritesheet: {
 				src: ['../js/*.js', 'build/simplespritesheet.js'],
 				dest: 'dist/simplespritesheet.js'
+			},
+			draganddrop: {
+				src: ['../js/*.js', 'build/draganddrop.js'],
+				dest: 'dist/draganddrop.js'
 			}
 		},
 		min: {
@@ -39,6 +47,10 @@ module.exports = function(grunt) {
 			localtoglobal: {
 				src: ['<banner:meta.banner>', '<config:concat.localtoglobal.dest>'],
 				dest: 'dist/localtoglobal.js'
+			},
+			globaltolocal3: {
+				src: ['<banner:meta.banner>', '<config:concat.globaltolocal3.dest>'],
+				dest: 'dist/globaltolocal3.js'
 			},
 			matrixtest: {
 				src: ['<banner:meta.banner>', '<config:concat.matrixtest.dest>'],
@@ -51,6 +63,10 @@ module.exports = function(grunt) {
 			simplespritesheet: {
 				src: ['<banner:meta.banner>', '<config:concat.simplespritesheet.dest>'],
 				dest: 'dist/simplespritesheet.js'
+			},
+			draganddrop: {
+				src: ['<banner:meta.banner>', '<config:concat.draganddrop.dest>'],
+				dest: 'dist/draganddrop.js'
 			}
 		},
 		watch: {
@@ -113,6 +129,14 @@ module.exports = function(grunt) {
 					simplespritesheet: {
 						main: 'demos.easel.SimpleSpriteSheetTest',
 						output: 'build/simplespritesheet.js'
+					},
+					draganddrop: {
+						main: 'demos.easel.DragAndDropTest',
+						output: 'build/draganddrop.js'
+					},
+					globaltolocal3: {
+						main: 'demos.easel.GlobalToLocal3Test',
+						output: 'build/globaltolocal3.js'
 					}
 				}
 			}
