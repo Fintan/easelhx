@@ -90,7 +90,8 @@ module.exports = function(grunt) {
 		haxe: {
 			easeljsdemos: {
 				main:'',//gets replaced in output
-				classpath: ['src', '../externs', 'thirdparty'],
+				classpath: ['src', '../externs'],
+				libs:['xirsys_stdjs'],
 				misc:["--js-modern"],
 				output: {
 					bargraphdemo: {
